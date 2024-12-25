@@ -9,7 +9,7 @@ Simple web scraper for Instagram followers and following list. This project iden
 - Alternatively, run the Python script to process the files locally and output the result in the terminal.
 
 ## How to Use the GitHub Pages App
-1. Clone or visit the [GitHub Pages link](jessica-pei8.github.io/notfollowingme/) of this project.
+1. Clone or visit the GitHub Pages link of this project.
 2. Upload your followers and following HTML files by clicking the respective "Choose File" buttons.
 3. Click the "Check" button to see the users who are not following you back.
 4. The result will be displayed on the page, listing the usernames of those who are not following you back.
