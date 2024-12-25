@@ -1,5 +1,5 @@
 # notfollowingme
-Simple web scraper for instagram followers and following list. This project identifies Instagram accounts that you follow but do not follow you back. It processes two HTML files exported from your Instagram account: one containing your followers and the other containing the accounts you follow.
+Simple web scraper for Instagram followers and following list. This project identifies Instagram accounts that you follow but do not follow you back. It processes two HTML files exported from your Instagram account: one containing your followers and the other containing the accounts you follow.
 
 ## Features
 - Parses Instagram follower and following lists from HTML files.
@@ -8,7 +8,7 @@ Simple web scraper for instagram followers and following list. This project iden
 
 ## Prerequisites
 - Python 3.7+
-- HTML files for followers and following lists downloaded from Instagram.
+- HTML files for followers and following lists downloaded from Instagram. [Tutorial](https://help.instagram.com/181231772500920?helpref=about_content)
 
 ## Installation
 
