@@ -1,48 +1,68 @@
-function processFiles() {
+function handleFiles() {
     const followersFile = document.getElementById("followers-file").files[0];
     const followingFile = document.getElementById("following-file").files[0];
-    const outputDiv = document.getElementById("output");
-
-    if (!followersFile || !followingFile) {
-        outputDiv.textContent = "Please upload both files.";
-        return;
+  
+    if (followersFile && followingFile) {
+      Promise.all([parseHTML(followersFile), parseHTML(followingFile)]).then(
+        ([followers, following]) => {
+          const notFollowingBack = following.filter(
+            (user) => !followers.includes(user)
+          );
+  
+          const notFollowedBack = followers.filter(
+            (user) => !following.includes(user)
+          );
+  
+          displayResults(notFollowingBack, notFollowedBack);
+        }
+      );
     }
-
-    const reader1 = new FileReader();
-    const reader2 = new FileReader();
-
-    reader1.onload = function (e) {
-        const followersHtml = e.target.result;
-        const followers = extractUsernames(followersHtml);
-        
-        reader2.onload = function (e) {
-            const followingHtml = e.target.result;
-            const following = extractUsernames(followingHtml);
-
-            const notFollowingBack = [...following].filter(user => !followers.has(user));
-            
-            if (notFollowingBack.length > 0) {
-                outputDiv.innerHTML = `<strong>Users not following you back:</strong><ul>${notFollowingBack.map(user => `<li>${user}</li>`).join('')}</ul>`;
-            } else {
-                outputDiv.textContent = "Everyone is following you back!";
-            }
-        };
-
-        reader2.readAsText(followingFile);
-    };
-
-    reader1.readAsText(followersFile);
-}
-
-function extractUsernames(html) {
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(html, "text/html");
-    const links = doc.querySelectorAll('a[href*="instagram.com"]');
-    const usernames = new Set();
-
-    links.forEach(link => {
-        usernames.add(link.textContent.trim());
+  }
+  
+  function parseHTML(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = function (event) {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(event.target.result, "text/html");
+        const users = Array.from(doc.querySelectorAll("a[href*='instagram.com']")).map(
+          (link) => link.textContent.trim()
+        );
+        resolve(users);
+      };
+      reader.onerror = reject;
+      reader.readAsText(file);
     });
-
-    return usernames;
-}
+  }
+  
+  function displayResults(notFollowingBack, notFollowedBack) {
+    const notFollowingBackList = document.getElementById("not-following-back");
+    notFollowingBackList.innerHTML = "<h3>Not Following You Back:</h3>";
+    notFollowingBack.forEach((username) => {
+      const listItem = document.createElement("li");
+      listItem.textContent = username;
+      notFollowingBackList.appendChild(listItem);
+    });
+  
+    const notFollowedBackList = document.getElementById("not-followed-back");
+    notFollowedBackList.innerHTML = "<h3>You Are Not Following Back:</h3>";
+    notFollowedBack.forEach((username) => {
+      const listItem = document.createElement("li");
+      listItem.textContent = username;
+      notFollowedBackList.appendChild(listItem);
+    });
+  }
+  
+  function displayGallery() {
+    const galleryContainer = document.getElementById("gallery");
+    for (let i = 1; i <= 6; i++) {
+      const img = document.createElement("img");
+      img.src = `assets/step${i}.png`;
+      img.alt = `Step ${i}`;
+      img.classList.add("gallery-image");
+      galleryContainer.appendChild(img);
+    }
+  }
+  
+  document.addEventListener("DOMContentLoaded", displayGallery);
+  

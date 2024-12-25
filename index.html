@@ -1,31 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Instagram Follower Checker</title>
-    <style>
-        body { font-family: Arial, sans-serif; }
-        .output { margin-top: 20px; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instagram Follower and Following Checker by Jessica 😊 </title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Instagram Follower Checker</h1>
-    <p>Upload your following and followers list (HTML files) to check who is not following you back:</p>
 
-    <div>
-        <label for="followers-file">Followers List:</label>
-        <input type="file" id="followers-file" accept=".html">
-    </div>
-    <div>
-        <label for="following-file">Following List:</label>
-        <input type="file" id="following-file" accept=".html">
-    </div>
+  <h1>Instagram Follower Checker</h1>
 
-    <button onclick="processFiles()">Check</button>
+  <section id="instructions">
+    <h2>How to Use</h2>
+    <p>Upload your followers and following HTML files to compare who is not following you back and who you are not following back.</p>
+    <p>After uploading the files, you will see the results below, and you can also follow the step-by-step gallery to visualize the process.</p>
+  </section>
 
-    <div class="output" id="output"></div>
+  <section id="file-upload">
+    <h2>Upload Files</h2>
+    <label for="followers-file">Choose your followers list (HTML):</label>
+    <input type="file" id="followers-file" accept=".html"><br><br>
 
-    <script src="script.js"></script>
+    <label for="following-file">Choose your following list (HTML):</label>
+    <input type="file" id="following-file" accept=".html"><br><br>
+
+    <button onclick="handleFiles()">Check</button>
+  </section>
+
+  <section id="results">
+    <h2>Results</h2>
+    <div id="not-following-back"></div>
+    <div id="not-followed-back"></div>
+  </section>
+
+  <section id="gallery">
+    <h2>Step-by-Step Guide</h2>
+    <div id="gallery-container"></div>
+  </section>
+
+  <script src="script.js"></script>
 </body>
 </html>
