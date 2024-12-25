@@ -3,9 +3,23 @@
 Simple web scraper for Instagram followers and following list. This project identifies Instagram accounts that you follow but do not follow you back. It processes two HTML files exported from your Instagram account: one containing your followers and the other containing the accounts you follow.
 
 ## Features
-- Parses Instagram follower and following lists from HTML files.
-- Compares the two lists to identify users who are not following you back.
-- Outputs the list of usernames in the terminal.
+- Upload your followers and following HTML files on the web app to check who is not following you back.
+- Alternatively, run the Python script to process the files locally and output the result in the terminal.
+
+## How to Use the GitHub Pages App
+1. Clone or visit the GitHub Pages link of this project.
+2. Upload your followers and following HTML files by clicking the respective "Choose File" buttons.
+3. Click the "Check" button to see the users who are not following you back.
+4. The result will be displayed on the page, listing the usernames of those who are not following you back.
+
+### File Format for Web App:
+- Upload two HTML files:
+  - One for your **followers list**.
+  - One for your **following list**.
+- These files should contain links to Instagram profiles. The app extracts Instagram usernames from `a` tags containing `instagram.com` in the `href` attribute.
+
+## How to Use the Python Script
+If you'd prefer to process the follower and following lists locally, you can use the Python script provided in this repository.
 
 ## Prerequisites
 - Python 3.7+
