@@ -8,7 +8,7 @@ Simple web scraper for instagram followers and following list. This project iden
 
 ## Prerequisites
 - Python 3.7+
-- HTML files for followers and following lists downloaded from Instagram.
+- HTML files for followers and following lists downloaded from Instagram. [Tutorial](https://help.instagram.com/181231772500920?helpref=about_content)
 
 ## Installation
 
