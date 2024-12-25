@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Follower Checker</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .output { margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Instagram Follower Checker</h1>
+    <p>Upload your following and followers list (HTML files) to check who is not following you back:</p>
+
+    <div>
+        <label for="followers-file">Followers List:</label>
+        <input type="file" id="followers-file" accept=".html">
+    </div>
+    <div>
+        <label for="following-file">Following List:</label>
+        <input type="file" id="following-file" accept=".html">
+    </div>
+
+    <button onclick="processFiles()">Check</button>
+
+    <div class="output" id="output"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
