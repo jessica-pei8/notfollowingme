@@ -1,5 +1,6 @@
 # notfollowingme
-(https://jessica-pei8.github.io/notfollowingme/)
+https://jessica-pei8.github.io/notfollowingme/
+
 Simple web scraper for Instagram followers and following list. This project identifies Instagram accounts that you follow but do not follow you back. It processes two HTML files exported from your Instagram account: one containing your followers and the other containing the accounts you follow.
 
 ## Features
