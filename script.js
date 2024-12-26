@@ -16,6 +16,8 @@ function handleFiles() {
           displayResults(notFollowingBack, notFollowedBack);
         }
       );
+    } else {
+      alert("Please upload both followers and following HTML files.");
     }
   }
   
@@ -37,6 +39,8 @@ function handleFiles() {
   
   function displayResults(notFollowingBack, notFollowedBack) {
     const notFollowingBackList = document.getElementById("not-following-back");
+    const notFollowedBackList = document.getElementById("not-followed-back");
+  
     notFollowingBackList.innerHTML = "<h3>Not Following You Back:</h3>";
     notFollowingBack.forEach((username) => {
       const listItem = document.createElement("li");
@@ -44,7 +48,6 @@ function handleFiles() {
       notFollowingBackList.appendChild(listItem);
     });
   
-    const notFollowedBackList = document.getElementById("not-followed-back");
     notFollowedBackList.innerHTML = "<h3>You Are Not Following Back:</h3>";
     notFollowedBack.forEach((username) => {
       const listItem = document.createElement("li");
@@ -54,7 +57,7 @@ function handleFiles() {
   }
   
   function displayGallery() {
-    const galleryContainer = document.getElementById("gallery");
+    const galleryContainer = document.getElementById("gallery-container");
     for (let i = 1; i <= 6; i++) {
       const img = document.createElement("img");
       img.src = `assets/step${i}.png`;
@@ -64,5 +67,9 @@ function handleFiles() {
     }
   }
   
-  document.addEventListener("DOMContentLoaded", displayGallery);
+  document.addEventListener("DOMContentLoaded", function () {
+    displayGallery(); 
+    const checkButton = document.querySelector("button"); 
+    checkButton.addEventListener("click", handleFiles);   
+  });
   
