@@ -69,19 +69,19 @@ function displayResults(notFollowingBack, notFollowedBack) {
 function changeStep(direction) {
     const galleryImage = document.getElementById("gallery-image");
     const stepNumberText = document.getElementById("step-number");
-    const totalSteps = 6; 
+    const totalSteps = 6;
     currentStep += direction;
 
     if (currentStep < 1) {
-        currentStep = totalSteps;  
+        currentStep = totalSteps;
     } else if (currentStep > totalSteps) {
-        currentStep = 1; 
+        currentStep = 1;
     }
 
     galleryImage.src = `assets/step${currentStep}.png`;
     galleryImage.alt = `Step ${currentStep}`;
-
-    stepNumberText.textContent = `Step ${currentStep}`;
+    
+    stepNumberText.textContent = `Step ${currentStep}`;  
 }
 
 document.addEventListener("DOMContentLoaded", function () {
