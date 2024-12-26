@@ -67,15 +67,15 @@ function displayResults(notFollowingBack, notFollowedBack) {
 }
 
 function changeStep(direction) {
-    currentStep += direction;
-    
-    if (currentStep < 1) {
-        currentStep = 6;
-    } else if (currentStep > 6) {
-        currentStep = 1;
-    }
-
     const galleryImage = document.getElementById("gallery-image");
+    const totalSteps = 6; 
+    currentStep += direction;
+
+    if (currentStep < 1) {
+        currentStep = totalSteps; 
+    } else if (currentStep > totalSteps) {
+        currentStep = 1; 
+    }
     galleryImage.src = `assets/step${currentStep}.png`;
     galleryImage.alt = `Step ${currentStep}`;
 }
