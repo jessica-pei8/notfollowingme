@@ -1,3 +1,5 @@
+let currentStep = 1;
+
 function handleFiles() {
     const followersFile = document.getElementById("followers-file").files[0];
     const followingFile = document.getElementById("following-file").files[0];
@@ -19,9 +21,9 @@ function handleFiles() {
     } else {
       alert("Please upload both followers and following HTML files.");
     }
-  }
-  
-  function parseHTML(file) {
+}
+
+function parseHTML(file) {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.onload = function (event) {
@@ -35,13 +37,17 @@ function handleFiles() {
       reader.onerror = reject;
       reader.readAsText(file);
     });
-  }
-  
-  function displayResults(notFollowingBack, notFollowedBack) {
+}
+
+function displayResults(notFollowingBack, notFollowedBack) {
     const notFollowingBackList = document.getElementById("not-following-back");
     const notFollowedBackList = document.getElementById("not-followed-back");
   
     notFollowingBackList.innerHTML = "<h3>Not Following You Back:</h3>";
+    const notFollowingBackCount = notFollowingBack.length;
+    const notFollowingBackCountElem = document.createElement("p");
+    notFollowingBackCountElem.textContent = `Count: ${notFollowingBackCount}`;
+    notFollowingBackList.appendChild(notFollowingBackCountElem);
     notFollowingBack.forEach((username) => {
       const listItem = document.createElement("li");
       listItem.textContent = username;
@@ -49,27 +55,32 @@ function handleFiles() {
     });
   
     notFollowedBackList.innerHTML = "<h3>You Are Not Following Back:</h3>";
+    const notFollowedBackCount = notFollowedBack.length;
+    const notFollowedBackCountElem = document.createElement("p");
+    notFollowedBackCountElem.textContent = `Count: ${notFollowedBackCount}`;
+    notFollowedBackList.appendChild(notFollowedBackCountElem);
     notFollowedBack.forEach((username) => {
       const listItem = document.createElement("li");
       listItem.textContent = username;
       notFollowedBackList.appendChild(listItem);
     });
-  }
-  
-  function displayGallery() {
-    const galleryContainer = document.getElementById("gallery-container");
-    for (let i = 1; i <= 6; i++) {
-      const img = document.createElement("img");
-      img.src = `assets/step${i}.png`;
-      img.alt = `Step ${i}`;
-      img.classList.add("gallery-image");
-      galleryContainer.appendChild(img);
+}
+
+function changeStep(direction) {
+    currentStep += direction;
+    
+    if (currentStep < 1) {
+        currentStep = 6;
+    } else if (currentStep > 6) {
+        currentStep = 1;
     }
-  }
-  
-  document.addEventListener("DOMContentLoaded", function () {
-    displayGallery();
+
+    const galleryImage = document.getElementById("gallery-image");
+    galleryImage.src = `assets/step${currentStep}.png`;
+    galleryImage.alt = `Step ${currentStep}`;
+}
+
+document.addEventListener("DOMContentLoaded", function () {
     const checkButton = document.getElementById("check-button");
-    checkButton.addEventListener("click", handleFiles); 
-  });
-  
+    checkButton.addEventListener("click", handleFiles);
+});
