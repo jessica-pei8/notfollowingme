@@ -68,8 +68,8 @@ function handleFiles() {
   }
   
   document.addEventListener("DOMContentLoaded", function () {
-    displayGallery(); 
-    const checkButton = document.querySelector("button"); 
-    checkButton.addEventListener("click", handleFiles);   
+    displayGallery();
+    const checkButton = document.getElementById("check-button");
+    checkButton.addEventListener("click", handleFiles); 
   });
   
