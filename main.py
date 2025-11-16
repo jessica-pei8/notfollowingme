@@ -1,23 +1,32 @@
 from bs4 import BeautifulSoup
 
-def extract_usernames(html, is_following=False):
+def extract_username(url):
+    url = url.rstrip("/")   
+    username = url.split("/")[-1]
+
+    if username.startswith("_u"):
+        username = username.replace("_u", "", 1)
+
+    return username
+
+def extract_followers(html):
     soup = BeautifulSoup(html, "html.parser")
 
-    links = soup.find_all("a", href=True)
-    usernames_from_links = [
-        link.get_text(strip=True)
-        for link in links
-        if "instagram.com" in link["href"]
+    usernames = [
+        extract_username(a["href"])
+        for a in soup.find_all("a", href=True)
+        if "instagram.com" in a["href"]
     ]
+    return set(usernames)
 
-    if not is_following:
-        return set(usernames_from_links)
+def extract_following(html):
+    soup = BeautifulSoup(html, "html.parser")
 
     h2_tags = soup.find_all("h2")
-    usernames_from_h2 = [h2.get_text(strip=True) for h2 in h2_tags]
+    if h2_tags:
+        return set(h2.get_text(strip=True) for h2 in h2_tags)
 
-    return set(usernames_from_h2 if usernames_from_h2 else usernames_from_links)
-
+    return extract_followers(html)
 
 with open("followers_1.html", "r", encoding="utf-8") as f:
     followers_html = f.read()
@@ -25,11 +34,16 @@ with open("followers_1.html", "r", encoding="utf-8") as f:
 with open("following.html", "r", encoding="utf-8") as f:
     following_html = f.read()
 
-followers = extract_usernames(followers_html, is_following=False)
-following = extract_usernames(following_html, is_following=True)
+followers = extract_followers(followers_html)
+following = extract_following(following_html)
 
 not_following_back = following - followers
+you_not_following = followers - following
 
-print("Usernames of those who are not following you back:")
-for user in sorted(not_following_back):
-    print(user)
+print("Not Following You Back:")
+for u in sorted(not_following_back):
+    print(u)
+
+print("\nYou Are Not Following Back:")
+for u in sorted(you_not_following):
+    print(u)
